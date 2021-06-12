@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -13,6 +14,7 @@ class UserController extends Controller
     }
 
     public function create(Request $request) {
+//        $request['password'] = Hash::make($request['password']);
         $user = User::create($request->all());
         return response()->json($user,201);
     }
