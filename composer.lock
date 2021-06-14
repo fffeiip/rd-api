@@ -435,16 +435,16 @@
         },
         {
             "name": "flipbox/lumen-generator",
-            "version": "8.2.0",
+            "version": "8.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flipboxstudio/lumen-generator.git",
-                "reference": "831485667a2abd8bd73eb50e1145fd0d204285ba"
+                "reference": "78edd7588ffb711fe39c34089b532c0d24d737b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flipboxstudio/lumen-generator/zipball/831485667a2abd8bd73eb50e1145fd0d204285ba",
-                "reference": "831485667a2abd8bd73eb50e1145fd0d204285ba",
+                "url": "https://api.github.com/repos/flipboxstudio/lumen-generator/zipball/78edd7588ffb711fe39c34089b532c0d24d737b5",
+                "reference": "78edd7588ffb711fe39c34089b532c0d24d737b5",
                 "shasum": ""
             },
             "require": {
@@ -477,9 +477,9 @@
             "description": "A Lumen Generator You Are Missing",
             "support": {
                 "issues": "https://github.com/flipboxstudio/lumen-generator/issues",
-                "source": "https://github.com/flipboxstudio/lumen-generator/tree/8.2.0"
+                "source": "https://github.com/flipboxstudio/lumen-generator/tree/8.2.1"
             },
-            "time": "2020-12-14T16:22:20+00:00"
+            "time": "2021-06-14T19:43:48+00:00"
         },
         {
             "name": "graham-campbell/result-type",
