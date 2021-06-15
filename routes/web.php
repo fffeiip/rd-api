@@ -19,7 +19,6 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('users/{id}', ['uses' => 'UserController@show']);
-    $router->get('users', ['uses' => 'UserController@showAll']);
     $router->post('users', ['uses' => 'UserController@create']);
     $router->delete('users/{id}', ['uses' => 'UserController@delete']);
     $router->put('users/{id}', ['uses' => 'UserController@update']);
