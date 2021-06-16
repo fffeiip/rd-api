@@ -22,7 +22,7 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            return response('User not found. '.$e->getMessage(), 404);
+            return response('Register not found. '.$e->getMessage(), 404);
         }
         $user->update($request->all());
         return response()->json($user);
@@ -32,9 +32,9 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            return response('User not found. '.$e->getMessage(), 404);
+            return response('Register not found. '.$e->getMessage(), 404);
         }
         $user->delete();
-        return response()->json(['message' => 'Successfully deleted user', 'user' => $user]);
+        return response()->json(['message' => 'Successfully deleted register', 'user' => $user]);
     }
 }

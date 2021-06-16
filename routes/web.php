@@ -23,4 +23,21 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->delete('users/{id}', ['uses' => 'UserController@delete']);
     $router->put('users/{id}', ['uses' => 'UserController@update']);
 
+    $router->get('dynamics/{id}', ['uses' => 'DynamicsController@show']);
+    $router->post('dynamics', ['uses' => 'DynamicsController@create']);
+    $router->get('dynamics', ['uses' => 'DynamicsController@showAll']);
+    $router->delete('dynamics/{id}', ['uses' => 'DynamicsController@delete']);
+    $router->put('dynamics/{id}', ['uses' => 'DynamicsController@update']);
+
+    $router->get('dynamics/user/{id}', ['uses' => 'LinkDynamicsUserController@showDynamicsByUser']);
+    $router->get('dynamics/created/user/{id}', ['uses' => 'LinkDynamicsUserController@showUserCreatedDynamics']);
+    $router->post('dynamics/register', ['uses' => 'LinkDynamicsUserController@create']);
+    $router->delete('dynamics/register/{id}', ['uses' => 'LinkDynamicsUserController@delete']);
+    $router->get('dynamics/register/{id}', ['uses' => 'LinkDynamicsUserController@show']);
+
+    $router->get('team/{id}', ['uses' => 'TeamController@show']);
+    $router->post('team', ['uses' => 'TeamController@create']);
+    $router->delete('team/{id}', ['uses' => 'TeamController@delete']);
+    $router->put('team/{id}', ['uses' => 'TeamController@update']);
+
 });
