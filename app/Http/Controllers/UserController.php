@@ -14,6 +14,12 @@ class UserController extends Controller
     }
 
     public function create(Request $request) {
+        $this->validate($request, [
+            "name" => "required|string|max:255",
+            "email" => "required|email|unique:users",
+            "password" => "required|min:8",
+            'password_confirm' => 'required|same:password'
+        ]);
         $user = User::create($request->all());
         return response()->json($user,201);
     }
