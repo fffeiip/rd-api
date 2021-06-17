@@ -17,7 +17,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->post('login', ['uses' => 'UserController@authenticate']);
+
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
+
     $router->get('users/{id}', ['uses' => 'UserController@show']);
     $router->post('users', ['uses' => 'UserController@create']);
     $router->delete('users/{id}', ['uses' => 'UserController@delete']);
