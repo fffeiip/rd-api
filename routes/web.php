@@ -40,4 +40,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->delete('team/{id}', ['uses' => 'TeamController@delete']);
     $router->put('team/{id}', ['uses' => 'TeamController@update']);
 
+    $router->get('team/user/{id}', ['uses' => 'LinkTeamUserController@showTeamsByUser']);
+    $router->get('team/users/{id}', ['uses' => 'LinkTeamUserController@showUsersByTeam']);
+    $router->post('team/register', ['uses' => 'LinkTeamUserController@create']);
+    $router->delete('team/register/{id}', ['uses' => 'LinkTeamUserController@delete']);
+    $router->get('team/register/{id}', ['uses' => 'LinkTeamUserController@show']);
+
 });
