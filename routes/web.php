@@ -19,10 +19,12 @@ $router->get('/', function () use ($router) {
 
 $router->post('login', ['uses' => 'UserController@authenticate']);
 
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->post('users', ['uses' => 'UserController@create']);
+});
 $router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
 
     $router->get('users/{id}', ['uses' => 'UserController@show']);
-    $router->post('users', ['uses' => 'UserController@create']);
     $router->delete('users/{id}', ['uses' => 'UserController@delete']);
     $router->put('users/{id}', ['uses' => 'UserController@update']);
 

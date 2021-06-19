@@ -23,8 +23,8 @@ class UserController extends Controller
         $user = User::where('email', $request->input('email'))->first();
         if (Hash::check($request->input('password'), $user->password)) {
             $apikey = base64_encode(\Illuminate\Support\Str::random(40));
-            User::where('email', $request->input('email'))->update(['api_key' => "$apikey"]);
-            return response()->json(['status' => 'success', 'api_key' => $apikey, 'user' => $user]);
+            User::where('email', $request->input('email'))->update(['api_token' => "$apikey"]);
+            return response()->json(['status' => 'success', 'api_token' => $apikey, 'user_id' => $user->id]);
         } else {
             return response()->json(['status' => 'fail'], 401);
         }
