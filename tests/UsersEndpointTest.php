@@ -68,20 +68,21 @@ class UsersEndpointTest extends TestCase
 
     public function testAuthRoute()
     {
-        $user = $this->json('POST','api/users', [
+        $user = [
             "name" => "PhpUniter",
             'email' => "oi322@email.com",
             'password' => "phpunit123",
             'password_confirm' => "phpunit123"
-        ])->response->getData();
+        ];
 
-        $response_login = $this->json('POST','/login', [
-            "email" => $user->email,
-            "password" => "phpunit123"
+        $new_user = $this->json('POST','api/users', $user)->response->getData();
+
+        $api_token = $this->getApiToken([
+            'email' => "oi322@email.com",
+            'password' => "phpunit123"
         ]);
 
-        $api_token = $response_login->response->getData()->api_token;
-        $endpoint = 'api/users/'.$user->id;
+        $endpoint = 'api/users/'.$new_user->id;
         $header = ["api_token" => $api_token];
         $response_get_user = $this->get($endpoint, $header);
 
@@ -89,5 +90,82 @@ class UsersEndpointTest extends TestCase
 
     }
 
+    /**
+     * @dataProvider userprovider
+     */
+    public function testUpdateUser($user)
+    {
+        $user["password"] = "php12345";
+        $user["password_confirm"] ="php12345";
+
+        $new_user = $this->json('POST','api/users', $user)->response->getData();
+
+        $api_token = $this->getApiToken($user);
+        $url = 'api/users/' . $new_user->id;
+        $header = ["api_token" => $api_token];
+        $response = $this->put($url, [
+            "name" => "Jorgin"
+        ] ,$header);
+
+        $this->assertEquals(200, $response->response->status());
+    }
+
+    /**
+     * @dataProvider userprovider
+     */
+    public function testShouldDeleteUserById($user)
+    {
+        $user["password"] = "php12345";
+        $user["password_confirm"] ="php12345";
+
+        $new_user = $this->json('POST','api/users', $user)->response->getData();
+
+        $api_token = $this->getApiToken($user);
+        $url = 'api/users/' . $new_user->id;
+        $header = ["api_token" => $api_token];
+        $response = $this->delete($url , [], $header);
+
+        $this->assertEquals(200, $response->response->status());
+    }
+
+    /**
+     * @dataProvider userProvider
+     */
+    public function testShouldNotDeleteUser($user)
+    {
+        $user["password"] = "php12345";
+        $user["password_confirm"] ="php12345";
+
+        $new_user = $this->json('POST','api/users', $user)->response->getData();
+
+        $api_token = $this->getApiToken($user);
+        $url = 'api/users';
+        $header = ["api_token" => $api_token];
+        $response = $this->delete($url , [
+            "id" => $new_user->id
+        ], $header);
+
+        $this->assertEquals(405, $response->response->status());
+
+        $url = 'api/users/123' ;
+        $response = $this->delete($url , [], $header);
+        $this->assertEquals(404, $response->response->status());
+
+
+    }
+
+    /**
+     * @param $user
+     * @return mixed
+     */
+    private function getApiToken($user)
+    {
+        $response_login = $this->json('POST', '/login', [
+            "email" => $user["email"],
+            "password" => $user["password"]
+        ]);
+
+        return $response_login->response->getData()->api_token;
+    }
 
 }
