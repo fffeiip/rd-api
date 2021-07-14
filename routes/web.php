@@ -14,7 +14,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    echo "obladioblada";
 });
 
 $router->post('login', ['uses' => 'UserController@authenticate']);
