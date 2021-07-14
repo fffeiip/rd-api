@@ -1,5 +1,5 @@
 {
-    "name": "laravel/lumen",
+    "name": "rd-api",
     "description": "The Laravel Lumen Framework.",
     "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
@@ -41,6 +41,9 @@
         "post-install-cmd": [
             "php artisan clear-compiled",
             "chmod -R 777 public/",
+            "composer update"
+        ],
+        "post-update-cmd":  [
             "php artisan migrate"
         ]
     }
